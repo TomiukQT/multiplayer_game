@@ -93,7 +93,7 @@ jobs:
 
       - uses: game-ci/unity-builder@v2
         with:
-          unityVersion: 2021.1.24f1
+          unityVersion: 2022.1.0b3
           targetPlatform: WebGL
           versioning: Semantic
           allowDirtyBuild: true
