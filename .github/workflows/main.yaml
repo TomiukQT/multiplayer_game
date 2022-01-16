@@ -141,7 +141,7 @@ jobs:
       - uses: game-ci/unity-builder@v2
         with:
           targetPlatform: StandaloneWindows64
-          unityVersion: 2021.1.24f1
+          unityVersion: 2022.1.0b3
           versioning: Semantic
           allowDirtyBuild: true
 
