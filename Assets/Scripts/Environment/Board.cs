@@ -38,18 +38,22 @@ public class Board : MonoBehaviour
         for (int i = 0; i < MAX_SIZE; i++)
         {
             var piece = Instantiate(_initLayout._whiteBack[i],
-                GetPositionFromCoords((i, 0)), Quaternion.identity, transform);
+                GetPositionFromCoords((i, 0)), Quaternion.identity, transform).GetComponent<Piece>();
             var pawnPiece = Instantiate(_initLayout._whiteFront[i],
-                GetPositionFromCoords((i, 1)), Quaternion.identity, transform);
+                GetPositionFromCoords((i, 1)), Quaternion.identity, transform).GetComponent<Piece>();
+            _grid.Get(i, 0).Piece = piece;
+            _grid.Get(i, 1).Piece = pawnPiece;
         }
 
         //Black
         for (int i = 0; i < MAX_SIZE; i++)
         {
             var piece = Instantiate(_initLayout._blackBack[i],
-                GetPositionFromCoords((MAX_SIZE-i-1, 7)), Quaternion.identity, transform);
+                GetPositionFromCoords((MAX_SIZE-i-1, 7)), Quaternion.identity, transform).GetComponent<Piece>();
             var pawnPiece = Instantiate(_initLayout._blackFront[i],
-                GetPositionFromCoords((MAX_SIZE-i-1, 6)), Quaternion.identity, transform);
+                GetPositionFromCoords((MAX_SIZE-i-1, 6)), Quaternion.identity, transform).GetComponent<Piece>();
+            _grid.Get(MAX_SIZE-i-1, 7).Piece = piece;
+            _grid.Get(MAX_SIZE-i-1, 6).Piece = pawnPiece;
         }
         
     }

@@ -1,18 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Input;
 using UnityEngine;
 
-public class InputHandler : MonoBehaviour
+public class InputHandler : MonoBehaviour, IInputHandler
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+     
+    
 }

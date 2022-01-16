@@ -1,18 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using Enums;
 using UnityEngine;
 
-public class Piece : MonoBehaviour
+public abstract class Piece : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private TeamColor _teamColor;
+    
+    
+    public abstract List<Vector2Int> GetMovePositions();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
+    #region Public Getters/Setters
+
+    public TeamColor TeamColor => _teamColor;
+
+    #endregion
+    
 }
