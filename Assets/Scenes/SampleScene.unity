@@ -438,6 +438,7 @@ MonoBehaviour:
     type: 3}
   _whiteMaterial: {fileID: 2100000, guid: 7fd4544d04b8b14409b20c3a9343a575, type: 2}
   _blackMaterial: {fileID: 2100000, guid: 8981992acd9db9941b3f6d90c096a8f6, type: 2}
+  _initLayout: {fileID: 11400000, guid: 6fd2b55be406e4842ba6d3e6080bdea0, type: 2}
 --- !u!4 &1313614740
 Transform:
   m_ObjectHideFlags: 0

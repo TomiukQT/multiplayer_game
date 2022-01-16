@@ -9,6 +9,7 @@ public class Board : MonoBehaviour
     [SerializeField] private GameObject _tilePrefab;
     [SerializeField] private Material _whiteMaterial;
     [SerializeField] private Material _blackMaterial;
+    [SerializeField] private BoardLayout _initLayout;
     
     private Grid<Tile> _grid;
     private const int MAX_SIZE = 8;
@@ -27,6 +28,30 @@ public class Board : MonoBehaviour
                 _grid.Set(i,j,tile);
             }
         }
+        if(_initLayout != null)
+            GenerateLayout();
+    }
+
+    private void GenerateLayout()
+    {
+        //White
+        for (int i = 0; i < MAX_SIZE; i++)
+        {
+            var piece = Instantiate(_initLayout._whiteBack[i],
+                GetPositionFromCoords((i, 0)), Quaternion.identity, transform);
+            var pawnPiece = Instantiate(_initLayout._whiteFront[i],
+                GetPositionFromCoords((i, 1)), Quaternion.identity, transform);
+        }
+
+        //Black
+        for (int i = 0; i < MAX_SIZE; i++)
+        {
+            var piece = Instantiate(_initLayout._blackBack[i],
+                GetPositionFromCoords((MAX_SIZE-i-1, 7)), Quaternion.identity, transform);
+            var pawnPiece = Instantiate(_initLayout._blackFront[i],
+                GetPositionFromCoords((MAX_SIZE-i-1, 6)), Quaternion.identity, transform);
+        }
+        
     }
 
     public Vector3 GetPositionFromCoords(Vector2Int coords)
