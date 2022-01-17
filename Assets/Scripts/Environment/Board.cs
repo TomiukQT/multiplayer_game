@@ -37,10 +37,12 @@ public class Board : MonoBehaviour
         //White
         for (int i = 0; i < MAX_SIZE; i++)
         {
-            var piece = Instantiate(_initLayout._whiteBack[i],
+            var piece = Instantiate(_initLayout.Back[i],
                 GetPositionFromCoords((i, 0)), Quaternion.identity, transform).GetComponent<Piece>();
-            var pawnPiece = Instantiate(_initLayout._whiteFront[i],
+            var pawnPiece = Instantiate(_initLayout.Front[i],
                 GetPositionFromCoords((i, 1)), Quaternion.identity, transform).GetComponent<Piece>();
+            piece.GetComponent<MeshRenderer>().material = _whiteMaterial;
+            pawnPiece.GetComponent<MeshRenderer>().material = _whiteMaterial;
             _grid.Get(i, 0).Piece = piece;
             _grid.Get(i, 1).Piece = pawnPiece;
         }
@@ -48,10 +50,12 @@ public class Board : MonoBehaviour
         //Black
         for (int i = 0; i < MAX_SIZE; i++)
         {
-            var piece = Instantiate(_initLayout._blackBack[i],
+            var piece = Instantiate(_initLayout.Back[i],
                 GetPositionFromCoords((MAX_SIZE-i-1, 7)), Quaternion.identity, transform).GetComponent<Piece>();
-            var pawnPiece = Instantiate(_initLayout._blackFront[i],
+            var pawnPiece = Instantiate(_initLayout.Front[i],
                 GetPositionFromCoords((MAX_SIZE-i-1, 6)), Quaternion.identity, transform).GetComponent<Piece>();
+            piece.GetComponent<MeshRenderer>().material = _blackMaterial;
+            pawnPiece.GetComponent<MeshRenderer>().material = _blackMaterial;
             _grid.Get(MAX_SIZE-i-1, 7).Piece = piece;
             _grid.Get(MAX_SIZE-i-1, 6).Piece = pawnPiece;
         }
