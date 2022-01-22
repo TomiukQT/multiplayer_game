@@ -7,10 +7,23 @@ using UnityEngine;
 public class InputHandler : MonoBehaviour, IInputHandler
 {
      [SerializeField] private Vector3 _mousePosition = -Vector3.one;
+     [SerializeField] private Vector3 _mousePositionUp = -Vector3.one;
+
+     private Transform _selectedPiece;
+
+     private ChessController _chessController;
+
+     private void Awake()
+     {
+          _chessController = GameObject.Find("ChessController").GetComponent<ChessController>();
+     }
+
 
      private void Update()
      {
-          GetInput();        
+          GetInput();   
+          if(_selectedPiece != null)
+               PieceAtMouse();
      }
 
      private void GetInput()
@@ -20,8 +33,34 @@ public class InputHandler : MonoBehaviour, IInputHandler
                _mousePosition = -Vector3.one;
                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                if (Physics.Raycast(ray, out var hit))
-                    _mousePosition = hit.point;
+               {
+                    if (hit.collider.TryGetComponent<Piece>(out var piece))
+                    {
+                         _selectedPiece = piece.transform;
+                         var position = piece.Position;
+                         _mousePosition = hit.point;
+                    }
+               }
           }
+          if (Input.GetMouseButtonUp(0))
+          {
+               if (_selectedPiece == null)
+                    return;
+               
+               Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+               if (Physics.Raycast(ray, out var hit))
+               {
+                    _mousePositionUp = hit.point;
+                    //_chessController.GetInput(_selectedPiece,new Vector2Int());
+               }
+               
+               _selectedPiece = null;
+          }
+     }
+
+     private void PieceAtMouse()
+     {
+          
      }
 
      public Vector2Int GetSelectedTile()

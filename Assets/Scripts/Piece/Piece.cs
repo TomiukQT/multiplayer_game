@@ -30,10 +30,21 @@ public abstract class Piece : MonoBehaviour
 
     #region Public Getters/Setters
 
+    public void Setup(Board board, TeamColor color, Vector2Int pos)
+    {
+        _board = board;
+        _teamColor = color;
+        _position = pos;
+    }
+    
     public TeamColor TeamColor => _teamColor;
     public void SetBoard(Board board) => _board = board;
 
-    public void SetPosition(Vector2Int pos) => _position = pos;
+    public Vector2Int Position
+    {
+        get => _position;
+        set => _position = value;
+    }
 
     #endregion
     
@@ -50,11 +61,6 @@ public abstract class Piece : MonoBehaviour
     public void OnMouseExit()
     {
         _materialChanger.SetHighlight(false);
-    }
-
-    public void OnMouseClick()
-    {
-        
     }
 
     #endregion

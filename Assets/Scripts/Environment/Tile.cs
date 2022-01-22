@@ -33,12 +33,12 @@ public class Tile : MonoBehaviour
     
     private void OnMouseEnter()
     {
-        _piece?.OnMouseEnter();
+        //_piece?.OnMouseEnter();
     }
     
     private void OnMouseExit()
     {
-        _piece?.OnMouseExit();
+        //_piece?.OnMouseExit();
     }
 
 }

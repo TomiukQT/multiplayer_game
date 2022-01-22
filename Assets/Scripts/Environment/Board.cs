@@ -51,18 +51,37 @@ public class Board : MonoBehaviour
 
             piece.GetComponent<MeshRenderer>().material = color == TeamColor.White ? _whiteMaterial : _blackMaterial;
             pawnPiece.GetComponent<MeshRenderer>().material = color == TeamColor.White ? _whiteMaterial : _blackMaterial;
-            
-            piece.SetPosition(new Vector2Int(start+i*sign, row));
-            pawnPiece.SetPosition(new Vector2Int(start+i*sign, row+1*sign));
-            
+
             _grid.Get(start+i*sign, row).Piece = piece;
             _grid.Get(start+i*sign, row+1*sign).Piece = pawnPiece;
             
-            piece.SetBoard(this);
-            pawnPiece.SetBoard(this);
+            piece.Setup(this,color,new Vector2Int(start+i*sign, row));
+            pawnPiece.Setup(this,color,new Vector2Int(start+i*sign, row+1*sign));
+
         }
     }
 
+    public bool MovePiece(Piece piece, Vector2Int from, Vector2Int to)
+    {
+        if (!piece.GetMovePositions().Contains(to))
+            return false;
+        var opponentPiece = _grid.Get(to.x, to.y).Piece;
+
+        if (opponentPiece != null)
+        {
+            Destroy(opponentPiece.gameObject);
+        }
+
+        _grid.Get(to.x,to.y).Piece = piece;
+        _grid.Get(from.x, from.y).Piece = null;
+
+        piece.Position = to;
+        piece.transform.position = GetPositionFromCoords(to);
+        
+        return true;
+    }
+    
+    
     private void UnHighlightTiles()
     {
         if (_highligtedTiles == null)
