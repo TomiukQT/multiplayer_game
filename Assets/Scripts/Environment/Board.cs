@@ -12,7 +12,9 @@ public class Board : MonoBehaviour
     [SerializeField] private BoardLayout _initLayout;
     
     private Grid<Tile> _grid;
-    private const int MAX_SIZE = 8;
+    [HideInInspector] public const int MAX_SIZE = 8;
+
+    private List<Vector2Int> _highligtedTiles;
     public void GenerateBoard()
     {
         int size = MAX_SIZE;
@@ -43,8 +45,14 @@ public class Board : MonoBehaviour
                 GetPositionFromCoords((i, 1)), Quaternion.identity, transform).GetComponent<Piece>();
             piece.GetComponent<MeshRenderer>().material = _whiteMaterial;
             pawnPiece.GetComponent<MeshRenderer>().material = _whiteMaterial;
+            
+            piece.SetPosition(new Vector2Int(i,0));
+            pawnPiece.SetPosition(new Vector2Int(i,1));
+            
             _grid.Get(i, 0).Piece = piece;
             _grid.Get(i, 1).Piece = pawnPiece;
+            piece.SetBoard(this);
+            pawnPiece.SetBoard(this);
         }
 
         //Black
@@ -56,12 +64,35 @@ public class Board : MonoBehaviour
                 GetPositionFromCoords((MAX_SIZE-i-1, 6)), Quaternion.identity, transform).GetComponent<Piece>();
             piece.GetComponent<MeshRenderer>().material = _blackMaterial;
             pawnPiece.GetComponent<MeshRenderer>().material = _blackMaterial;
+            
+            piece.SetPosition(new Vector2Int(MAX_SIZE-i-1,7));
+            pawnPiece.SetPosition(new Vector2Int(MAX_SIZE-i-1,6));
+            
             _grid.Get(MAX_SIZE-i-1, 7).Piece = piece;
             _grid.Get(MAX_SIZE-i-1, 6).Piece = pawnPiece;
+            piece.SetBoard(this);
+            pawnPiece.SetBoard(this);
         }
         
     }
 
+    private void UnHighlightTiles()
+    {
+        if (_highligtedTiles == null)
+            return;
+        foreach (var tileCoord in _highligtedTiles)
+            _grid.Get(tileCoord.x,tileCoord.y)?.MaterialChanger.SetHighlight(false);
+    }
+    
+    
+    public void SetHighlightOnTiles(List<Vector2Int> coords, bool toggle = true)
+    {
+        UnHighlightTiles();
+        foreach (var tileCoord in coords)
+            _grid.Get(tileCoord.x,tileCoord.y)?.MaterialChanger.SetHighlight(toggle);
+        _highligtedTiles = coords;
+    }
+    
     public Vector3 GetPositionFromCoords(Vector2Int coords)
     {
         return new Vector3(coords.x,0,coords.y);
@@ -78,4 +109,6 @@ public class Board : MonoBehaviour
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireCube(transform.position + new Vector3(MAX_SIZE/2f,0,MAX_SIZE/2f),new Vector3(MAX_SIZE,.1f,MAX_SIZE));
     }
+
+    public Piece GetPiece(int x, int y) => _grid.Get(x, y)?.Piece;
 }

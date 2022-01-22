@@ -1,7 +1,6 @@
-namespace Input
+using UnityEngine;
+
+public interface IInputHandler
 {
-    public interface IInputHandler
-    {
-        
-    }
+    Vector2Int GetSelectedTile();
 }

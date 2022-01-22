@@ -6,6 +6,16 @@ public class Knight : Piece
 {
     public override List<Vector2Int> GetMovePositions()
     {
-        throw new System.NotImplementedException();
+        return new List<Vector2Int>()
+        {
+            _position + new Vector2Int(2, 1),
+            _position + new Vector2Int(2, -1),
+            _position + new Vector2Int(-2, -1),
+            _position + new Vector2Int(-2, 1),
+            _position + new Vector2Int(1, 2),
+            _position + new Vector2Int(1, -2),
+            _position + new Vector2Int(-1, -2),
+            _position + new Vector2Int(-1, 2),
+        };
     }
 }
