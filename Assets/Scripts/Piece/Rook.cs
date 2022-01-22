@@ -8,15 +8,21 @@ public class Rook : Piece
     public override List<Vector2Int> GetMovePositions()
     {
         var moves = new List<Vector2Int>();
-        for (int i = _position.x + 1; i < Board.MAX_SIZE; i++)
-            if (_board.GetPiece(i, _position.y) == null) moves.Add(_position + new Vector2Int(i, 0));
-        for (int i = _position.x - 1; i >= 0; i--)
-            if (_board.GetPiece(i, _position.y) == null) moves.Add(_position + new Vector2Int(-i, 0));
-        for (int i = _position.y + 1; i < Board.MAX_SIZE; i++)
-            if (_board.GetPiece(_position.x, i) == null) moves.Add(_position + new Vector2Int(0,i));
-        for (int i = _position.y - 1; i >= 0; i--)
-            if (_board.GetPiece(_position.x, i) == null) moves.Add(_position + new Vector2Int(0, -i));
-
+        var directions = new List<Vector2Int>()
+            {new Vector2Int(1, 0), new Vector2Int(-1, 0), new Vector2Int(0, 1), new Vector2Int(0, -1)};
+        foreach (var dir in directions)
+        {
+            for (Vector2Int pos = _position + dir; Utils.V2InRange(pos,0,Board.MAX_SIZE); pos += dir)
+            {
+                if (IsValid(pos.x,pos.y,out bool enemy) || enemy) 
+                    moves.Add(new Vector2Int(pos.x,pos.y));
+                else
+                    break;
+                if(enemy)
+                    break;
+            }
+        }
+        
         return moves;
     }
 }

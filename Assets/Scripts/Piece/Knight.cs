@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Knight : Piece
 {
     public override List<Vector2Int> GetMovePositions()
     {
-        return new List<Vector2Int>()
+        var moves =  new List<Vector2Int>()
         {
             _position + new Vector2Int(2, 1),
             _position + new Vector2Int(2, -1),
@@ -17,5 +18,7 @@ public class Knight : Piece
             _position + new Vector2Int(-1, -2),
             _position + new Vector2Int(-1, 2),
         };
+        return moves.FindAll(x => _board.GetPiece(x.x,x.y)?.TeamColor != _teamColor).ToList();
+
     }
 }

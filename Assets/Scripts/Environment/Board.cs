@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Enums;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -9,7 +10,7 @@ public class Board : MonoBehaviour
     [SerializeField] private GameObject _tilePrefab;
     [SerializeField] private Material _whiteMaterial;
     [SerializeField] private Material _blackMaterial;
-    [SerializeField] private BoardLayout _initLayout;
+   
     
     private Grid<Tile> _grid;
     [HideInInspector] public const int MAX_SIZE = 8;
@@ -30,50 +31,36 @@ public class Board : MonoBehaviour
                 _grid.Set(i,j,tile);
             }
         }
-        if(_initLayout != null)
-            GenerateLayout();
+
     }
 
-    private void GenerateLayout()
+    public void GeneratePieces(BoardLayout whiteLayout, BoardLayout blackLayout)
     {
-        //White
-        for (int i = 0; i < MAX_SIZE; i++)
-        {
-            var piece = Instantiate(_initLayout.Back[i],
-                GetPositionFromCoords((i, 0)), Quaternion.identity, transform).GetComponent<Piece>();
-            var pawnPiece = Instantiate(_initLayout.Front[i],
-                GetPositionFromCoords((i, 1)), Quaternion.identity, transform).GetComponent<Piece>();
-            piece.GetComponent<MeshRenderer>().material = _whiteMaterial;
-            pawnPiece.GetComponent<MeshRenderer>().material = _whiteMaterial;
-            
-            piece.SetPosition(new Vector2Int(i,0));
-            pawnPiece.SetPosition(new Vector2Int(i,1));
-            
-            _grid.Get(i, 0).Piece = piece;
-            _grid.Get(i, 1).Piece = pawnPiece;
-            piece.SetBoard(this);
-            pawnPiece.SetBoard(this);
-        }
+        GenerateSingleLayout(whiteLayout,TeamColor.White,0,0,+1);
+        GenerateSingleLayout(blackLayout,TeamColor.Black,MAX_SIZE-1,7,-1);
+    }
 
-        //Black
+    private void GenerateSingleLayout(BoardLayout layout,TeamColor color, int start,int row,int sign)
+    {
         for (int i = 0; i < MAX_SIZE; i++)
         {
-            var piece = Instantiate(_initLayout.Back[i],
-                GetPositionFromCoords((MAX_SIZE-i-1, 7)), Quaternion.identity, transform).GetComponent<Piece>();
-            var pawnPiece = Instantiate(_initLayout.Front[i],
-                GetPositionFromCoords((MAX_SIZE-i-1, 6)), Quaternion.identity, transform).GetComponent<Piece>();
-            piece.GetComponent<MeshRenderer>().material = _blackMaterial;
-            pawnPiece.GetComponent<MeshRenderer>().material = _blackMaterial;
+            var piece = Instantiate(layout.Back[i],
+                GetPositionFromCoords((start+i*sign, row)), Quaternion.identity, transform).GetComponent<Piece>();
+            var pawnPiece = Instantiate(layout.Front[i],
+                GetPositionFromCoords((start+i*sign, row+1*sign)), Quaternion.identity, transform).GetComponent<Piece>();
+
+            piece.GetComponent<MeshRenderer>().material = color == TeamColor.White ? _whiteMaterial : _blackMaterial;
+            pawnPiece.GetComponent<MeshRenderer>().material = color == TeamColor.White ? _whiteMaterial : _blackMaterial;
             
-            piece.SetPosition(new Vector2Int(MAX_SIZE-i-1,7));
-            pawnPiece.SetPosition(new Vector2Int(MAX_SIZE-i-1,6));
+            piece.SetPosition(new Vector2Int(start+i*sign, row));
+            pawnPiece.SetPosition(new Vector2Int(start+i*sign, row+1*sign));
             
-            _grid.Get(MAX_SIZE-i-1, 7).Piece = piece;
-            _grid.Get(MAX_SIZE-i-1, 6).Piece = pawnPiece;
+            _grid.Get(start+i*sign, row).Piece = piece;
+            _grid.Get(start+i*sign, row+1*sign).Piece = pawnPiece;
+            
             piece.SetBoard(this);
             pawnPiece.SetBoard(this);
         }
-        
     }
 
     private void UnHighlightTiles()

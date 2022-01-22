@@ -9,6 +9,7 @@ public abstract class Piece : MonoBehaviour
     [SerializeField] protected TeamColor _teamColor;
 
     protected Vector2Int _position;
+    protected bool _moved = false;
     
     protected Board _board;
     protected MaterialChanger _materialChanger;
@@ -19,8 +20,12 @@ public abstract class Piece : MonoBehaviour
     }
 
     public abstract List<Vector2Int> GetMovePositions();
-    
-    
+
+    protected bool IsValid(int x, int y, out bool enemy)
+    {
+        enemy = _board.GetPiece(x, y) != null && TeamColor != _teamColor;
+        return _board.GetPiece(x, y) == null || enemy;
+    }
 
 
     #region Public Getters/Setters
@@ -45,6 +50,11 @@ public abstract class Piece : MonoBehaviour
     public void OnMouseExit()
     {
         _materialChanger.SetHighlight(false);
+    }
+
+    public void OnMouseClick()
+    {
+        
     }
 
     #endregion
