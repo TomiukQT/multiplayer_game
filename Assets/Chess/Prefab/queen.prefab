@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 33643743512923556}
   - component: {fileID: 23947800390871528}
   - component: {fileID: -5046759192506288901}
+  - component: {fileID: 8323713296802739875}
   m_Layer: 0
   m_Name: queen
   m_TagString: Untagged
@@ -97,3 +98,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _teamColor: 1
+--- !u!64 &8323713296802739875
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1996616484037168}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 213f95ea384b849f1ae2fa47752b0356, type: 3}

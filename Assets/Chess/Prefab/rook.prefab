@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 33254007894895164}
   - component: {fileID: 23314385035919194}
   - component: {fileID: 4611326280932533133}
+  - component: {fileID: 6604808875845516174}
   m_Layer: 0
   m_Name: rook
   m_TagString: Untagged
@@ -97,3 +98,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _teamColor: 1
+--- !u!64 &6604808875845516174
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1764167493807252}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 43a5808dc7c9f4cbab815bda2043fa96, type: 3}

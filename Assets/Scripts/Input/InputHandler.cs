@@ -9,6 +9,11 @@ public class InputHandler : MonoBehaviour, IInputHandler
      [SerializeField] private Vector3 _mousePosition = -Vector3.one;
      [SerializeField] private Vector3 _mousePositionUp = -Vector3.one;
 
+     [SerializeField] private Vector2Int _from = -Vector2Int.one;
+     [SerializeField] private Vector2Int _to = -Vector2Int.one;
+     
+
+
      private Transform _selectedPiece;
 
      private ChessController _chessController;
@@ -51,7 +56,9 @@ public class InputHandler : MonoBehaviour, IInputHandler
                if (Physics.Raycast(ray, out var hit))
                {
                     _mousePositionUp = hit.point;
-                    //_chessController.GetInput(_selectedPiece,new Vector2Int());
+                    _from = new Vector2Int(Mathf.RoundToInt(_mousePosition.x), Mathf.RoundToInt(_mousePosition.z));
+                    _to = new Vector2Int(Mathf.RoundToInt(_mousePositionUp.x), Mathf.RoundToInt(_mousePositionUp.z));
+                    _chessController.GetInput(_selectedPiece.GetComponent<Piece>(),_from,_to);
                }
                
                _selectedPiece = null;

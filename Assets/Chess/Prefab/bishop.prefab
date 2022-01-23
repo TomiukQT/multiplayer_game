@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 33017829115479750}
   - component: {fileID: 23471427938731296}
   - component: {fileID: -1642025798741846532}
+  - component: {fileID: 8277566417208864876}
   m_Layer: 0
   m_Name: bishop
   m_TagString: Untagged
@@ -97,3 +98,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _teamColor: 1
+--- !u!64 &8277566417208864876
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1916680518618882}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: fb83f00e031a94dd9abf2e72a18251c0, type: 3}

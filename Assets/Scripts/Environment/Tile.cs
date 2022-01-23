@@ -26,8 +26,7 @@ public class Tile : MonoBehaviour
         get => _piece;
         set
         {
-            if (_piece == null)
-                _piece = value;
+            _piece = value;
         }
     }
     

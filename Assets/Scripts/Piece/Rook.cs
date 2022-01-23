@@ -14,7 +14,7 @@ public class Rook : Piece
         {
             for (Vector2Int pos = _position + dir; Utils.V2InRange(pos,0,Board.MAX_SIZE); pos += dir)
             {
-                if (IsValid(pos.x,pos.y,out bool enemy) || enemy) 
+                if (IsValid(pos.x,pos.y,out bool enemy)) 
                     moves.Add(new Vector2Int(pos.x,pos.y));
                 else
                     break;

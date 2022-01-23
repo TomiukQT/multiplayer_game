@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 33899922585379038}
   - component: {fileID: 23047484882299092}
   - component: {fileID: -4568330475226168762}
+  - component: {fileID: 5776276247550844607}
   m_Layer: 0
   m_Name: knight
   m_TagString: Untagged
@@ -97,3 +98,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _teamColor: 1
+--- !u!64 &5776276247550844607
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1830534316869998}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 99f0d192cd83c408381f8f6112fdf3dc, type: 3}

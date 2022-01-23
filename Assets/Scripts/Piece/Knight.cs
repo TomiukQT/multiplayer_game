@@ -18,7 +18,7 @@ public class Knight : Piece
             _position + new Vector2Int(-1, -2),
             _position + new Vector2Int(-1, 2),
         };
-        return moves.FindAll(x => _board.GetPiece(x.x,x.y)?.TeamColor != _teamColor).ToList();
+        return moves.FindAll(x => IsValid(x.x,x.y,out var enemy)).ToList();
 
     }
 }

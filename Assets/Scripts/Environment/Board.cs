@@ -63,8 +63,10 @@ public class Board : MonoBehaviour
 
     public bool MovePiece(Piece piece, Vector2Int from, Vector2Int to)
     {
+        Debug.Log("Moving");
         if (!piece.GetMovePositions().Contains(to))
             return false;
+        Debug.Log("MovingIn");
         var opponentPiece = _grid.Get(to.x, to.y).Piece;
 
         if (opponentPiece != null)

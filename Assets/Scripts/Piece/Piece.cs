@@ -23,8 +23,9 @@ public abstract class Piece : MonoBehaviour
 
     protected bool IsValid(int x, int y, out bool enemy)
     {
-        enemy = _board.GetPiece(x, y) != null && TeamColor != _teamColor;
-        return _board.GetPiece(x, y) == null || enemy;
+        var piece = _board.GetPiece(x, y);
+        enemy = piece != null && piece.TeamColor != _teamColor;
+        return piece == null || enemy;
     }
 
 
@@ -43,7 +44,11 @@ public abstract class Piece : MonoBehaviour
     public Vector2Int Position
     {
         get => _position;
-        set => _position = value;
+        set
+        {
+            _moved = true;
+            _position = value;
+        } 
     }
 
     #endregion
@@ -52,10 +57,12 @@ public abstract class Piece : MonoBehaviour
 
     public void OnMouseEnter()
     {
+        if(_)
         _materialChanger.SetHighlight(true);
         var validMoves = GetMovePositions();
         //Board ValidateMoves
         _board.SetHighlightOnTiles(validMoves);
+        Debug.Log("MouseOn");
     }
 
     public void OnMouseExit()

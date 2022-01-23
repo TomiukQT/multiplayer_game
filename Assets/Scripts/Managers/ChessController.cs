@@ -34,7 +34,7 @@ public class ChessController : MonoBehaviour
         _board.GenerateBoard();
         _board.GeneratePieces(_initLayout,_initLayout);
         
-        _isRunning = false;
+        _isRunning = true;
         _onTurn = TeamColor.White;
     }
     
