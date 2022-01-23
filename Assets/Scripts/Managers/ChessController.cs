@@ -9,14 +9,31 @@ public class ChessController : MonoBehaviour
 {
     private TeamColor _onTurn = TeamColor.White;
     private bool _isRunning = false;
-    private Board _board;
 
 
     public TeamColor OnTurn => _onTurn;
     public bool IsRunning => _isRunning;
+    
+    
+    [SerializeField] private Board _board;
+    [SerializeField] private BoardLayout _initLayout;
 
-    public void StartGame(Board board)
+
+    private void Awake()
     {
+    }
+
+    private void Start()
+    {
+        
+        StartGame();
+    }
+
+    public void StartGame()
+    {
+        _board.GenerateBoard();
+        _board.GeneratePieces(_initLayout,_initLayout);
+        
         _isRunning = false;
         _onTurn = TeamColor.White;
     }
